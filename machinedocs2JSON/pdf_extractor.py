@@ -28,7 +28,7 @@ class PDFExtractor:
             "CONFIDENTIAL. DO NOT DISTRIBUTE.",
             "FOR HLS HARD-LINE SOLUTIONS INTERNAL USE ONLY."
         ]
-        pattern = r'(CON\d+\s*.*?)(?=CON\d+|$)'
+        pattern = r'(CON\d+(?:\.\d+(?:-\d+)?)?(?:\s*.*?(?=CON\d+|\Z)|\s*.*))(?=CON\d+|\Z)'
         
         for page_num, page in enumerate(self.pdf_reader.pages[1:2], 2):
             print(f"Processing page {page_num}")
@@ -36,6 +36,7 @@ class PDFExtractor:
             #TO-DO: separate out all of the text by grouping them into a dictionary with CONX as the key and the text as the value
             con_dict = dict()
             captured_conn_groups = []
+            print(text)
 
             """
             matches = re.findall(pattern, text, re.DOTALL)
@@ -44,6 +45,8 @@ class PDFExtractor:
                 print(item)
             """
             
+            
+            """
             lines = text.split('\n')
             
             if lines and any(line.strip().startswith("D2") for line in lines):
@@ -56,9 +59,7 @@ class PDFExtractor:
         
         print(f"Total lines extracted: {len(all_content)}")
         return all_content
-        
-            
-    
+            """
 
     def close(self):
         if self.file:

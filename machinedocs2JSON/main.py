@@ -16,8 +16,8 @@ def main():
             print("No content was extracted from the PDF.")
         else:
             print("Extracted content:")
-            for i, line in enumerate(content, 1):
-                print(f"Line {i}: {line}")
+            #for i, line in enumerate(content, 1):
+                #print(f"Line {i}: {line}")
     except FileNotFoundError:
         print(f"Error: File not found at {args.pdf_path}", file=sys.stderr)
         sys.exit(1)
