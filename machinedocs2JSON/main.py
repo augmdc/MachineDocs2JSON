@@ -1,25 +1,13 @@
-import argparse
-import sys
-from pdf_extractor import PDFExtractor
+from pdf_extractor import PDFTableExtractor
+from data_processor import DataFrameProcessor
+import pandas as pd
 
-def main():
-    parser = argparse.ArgumentParser(description="Extract text from PDF")
-    parser.add_argument("pdf_path", help="Path to the PDF file")
-    args = parser.parse_args()
+pd.set_option('display.max_rows',100)
 
-    extractor = PDFExtractor(args.pdf_path)
-    try:
-        lines = extractor.extract_text_by_line()
-        for line in lines:
-            print(line)
-    except FileNotFoundError:
-        print(f"Error: File not found at {args.pdf_path}", file=sys.stderr)
-        sys.exit(1)
-    except Exception as e:
-        print(f"Error: An unexpected error occurred - {str(e)}", file=sys.stderr)
-        sys.exit(1)
-    finally:
-        extractor.close()
+extractor = PDFTableExtractor("C:\\Users\\achabris\\desktop\\26553-HXM02-EXCAVATOR-1.24.05.2701 1.pdf", '2,3')
+tables = extractor.extract_tables()
 
-if __name__ == "__main__":
-    main()
+df = tables[0].df
+df = DataFrameProcessor.process(df=df)
+print(df)
+#print(df['Pin'][17])
