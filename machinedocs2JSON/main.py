@@ -10,4 +10,3 @@ tables = extractor.extract_tables()
 df = tables[0].df
 df = DataFrameProcessor.process(df=df)
 print(df)
-#print(df['Pin'][17])
