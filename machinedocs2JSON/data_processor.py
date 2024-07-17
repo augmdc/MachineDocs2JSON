@@ -138,6 +138,23 @@ class DataFrameProcessor:
         return df_copy
     
     @classmethod
+    def process_multiple(cls, dataframes):
+        """
+        Processes multiple DataFrames using the static methods.
+        
+        Args:
+        dataframes (list): A list of pandas DataFrames to process.
+        
+        Returns:
+        list: A list of processed pandas DataFrames.
+        """
+        processed_dataframes = []
+        for df in dataframes:
+            processed_df = cls.process(df)
+            processed_dataframes.append(processed_df)
+        return processed_dataframes
+    
+    @classmethod
     def process(cls, df):
         """
         Processes the inputted Dataframe using static methods.
