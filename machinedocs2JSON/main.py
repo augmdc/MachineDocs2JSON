@@ -1,11 +1,11 @@
 import os
 import re
+import argparse
 from multiprocessing import Pool, cpu_count
 from pdf_extractor import PDFTableExtractor
 from data_processor import DataFrameProcessor
 from extract_file_info import FileInformationExtractor
 from json_formatter import JSONGenerator
-import pandas as pd
 
 def process_pdf(args):
     filepath, output_folder = args
@@ -41,28 +41,37 @@ def process_pdf(args):
         return f"Error processing file {filepath}: {str(e)}"
 
 def main():
-    input_folder = "C:\\Users\\achabris\\desktop\\input_pdfs"
-    output_folder = "C:\\Users\\achabris\\desktop\\output_jsons"
+    parser = argparse.ArgumentParser(description="Process PDF files and generate JSON output.")
+    parser.add_argument("input_folder", help="Path to the folder containing input PDF files")
+    parser.add_argument("output_folder", help="Path to the folder where JSON output will be saved")
+    parser.add_argument("-p", "--pattern", 
+                        help="Regex pattern to match PDF filenames (default: '\\d+-\\w+-\\w+\\.pdf')")
+    parser.add_argument("-n", "--num_processes", type=int, default=cpu_count(),
+                        help=f"Number of processes to use (default: {cpu_count()})")
+    
+    args = parser.parse_args()
 
-    if not os.path.exists(output_folder):
-        os.makedirs(output_folder)
+    if not os.path.exists(args.output_folder):
+        os.makedirs(args.output_folder)
 
     pdf_files = [
-        (os.path.join(input_folder, filename), output_folder)
-        for filename in os.listdir(input_folder)
+        (os.path.join(args.input_folder, filename), args.output_folder)
+        for filename in os.listdir(args.input_folder)
+        if re.match(args.pattern, filename)
     ]
 
-    # Determine the number of processes to use
-    num_processes = min(cpu_count(), len(pdf_files))
+    if not pdf_files:
+        print(f"No PDF files matching the pattern '{args.pattern}' found in {args.input_folder}")
+        return
 
-    # Create a pool of worker processes
+    num_processes = min(args.num_processes, len(pdf_files))
+    print(f"Processing {len(pdf_files)} PDF files using {num_processes} processes")
+
     with Pool(processes=num_processes) as pool:
         results = pool.map(process_pdf, pdf_files)
 
-    # Print results
     for result in results:
         print(result)
 
 if __name__ == "__main__":
-    pd.set_option('display.max_rows', 100)
     main()
