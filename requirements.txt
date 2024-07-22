@@ -3,3 +3,4 @@ opencv-python
 camelot[base]
 pandas
 numpy
+tqdm
