@@ -1,4 +1,3 @@
-from .pdf_extractor import PDFExtractor
-#from .json_converter import JSONConverter
+from .pdf_extractor import PDFTableExtractor
 
-__all__ = ['PDFExtractor', 'JSONConverter']
+__all__ = ['PDFExtractor']

@@ -1,0 +1,112 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "Machine": { "type": "string" },
+      "type": { "type": "string" },
+      "printDate": { "type": "string" },
+      "INVID": { "type": "integer" },
+      "D02s": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "CON1": { "$ref": "#/definitions/con1" },
+            "CON2": { "$ref": "#/definitions/con2" },
+            "CON3": { "$ref": "#/definitions/con1" },
+            "CON4": { "$ref": "#/definitions/con1" },
+            "CON5": { "$ref": "#/definitions/con5" },
+            "CON6": { "$ref": "#/definitions/con6" },
+            "D28_RISER_RIGHT": { "$ref": "#/definitions/riser" },
+            "D28_RISER_LEFT": { "$ref": "#/definitions/riser" }
+          },
+          "required": ["name", "CON1", "CON2", "CON3", "CON4", "CON5", "CON6", "D28_RISER_RIGHT", "D28_RISER_LEFT"]
+        }
+      }
+    },
+    "required": ["Machine", "type", "printDate", "INVID", "D02s"],
+    "definitions": {
+      "con1": {
+        "type": "object",
+        "properties": {
+          "1": { "$ref": "#/definitions/pin" },
+          "2": { "$ref": "#/definitions/pin" },
+          "3": { "$ref": "#/definitions/pin" },
+          "4": { "$ref": "#/definitions/pin" },
+          "5": { "$ref": "#/definitions/pin" },
+          "6": { "$ref": "#/definitions/pin" },
+          "7": { "$ref": "#/definitions/pin" },
+          "8": { "$ref": "#/definitions/pin" },
+          "9": { "$ref": "#/definitions/pin" },
+          "10": { "$ref": "#/definitions/pin" },
+          "11": { "$ref": "#/definitions/pin" },
+          "12": { "$ref": "#/definitions/pin" },
+          "13": { "$ref": "#/definitions/pin" },
+          "14": { "$ref": "#/definitions/pin" }
+        },
+        "required": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"]
+      },
+      "con2": {
+        "type": "object",
+        "properties": {
+          "1": { "$ref": "#/definitions/pin" },
+          "2": { "$ref": "#/definitions/pin" },
+          "3": { "$ref": "#/definitions/pin" }
+        },
+        "required": ["1", "2", "3"]
+      },
+      "con5": {
+        "type": "object",
+        "properties": {
+          "1": { "$ref": "#/definitions/pin" },
+          "2": { "$ref": "#/definitions/pin" },
+          "3": { "$ref": "#/definitions/pin" },
+          "4": { "$ref": "#/definitions/pin" }
+        },
+        "required": ["1", "2", "3", "4"]
+      },
+      "con6": {
+        "type": "object",
+        "properties": {
+          "1": { "$ref": "#/definitions/pin" },
+          "2": { "$ref": "#/definitions/pin" },
+          "3": { "$ref": "#/definitions/pin" },
+          "4": { "$ref": "#/definitions/pin" },
+          "5": { "$ref": "#/definitions/pin" },
+          "6": { "$ref": "#/definitions/pin" },
+          "7": { "$ref": "#/definitions/pin" },
+          "8": { "$ref": "#/definitions/pin" },
+          "9": { "$ref": "#/definitions/pin" },
+          "10": { "$ref": "#/definitions/pin" }
+        },
+        "required": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+      },
+      "riser": {
+        "type": "object",
+        "properties": {
+          "1": { "$ref": "#/definitions/pin" },
+          "2": { "$ref": "#/definitions/pin" },
+          "3": { "$ref": "#/definitions/pin" },
+          "4": { "$ref": "#/definitions/pin" },
+          "5": { "$ref": "#/definitions/pin" },
+          "6": { "$ref": "#/definitions/pin" },
+          "7": { "$ref": "#/definitions/pin" }
+        },
+        "required": ["1", "2", "3", "4", "5", "6", "7"]
+      },
+      "pin": {
+        "type": "object",
+        "properties": {
+          "type": { "type": "string" },
+          "frequency": { "type": "integer" },
+          "functionName": { "type": "string" },
+          "alternateNames": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        },
+        "required": ["type"]
+      }
+    }
+  }

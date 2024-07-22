@@ -1,1 +1,6 @@
-PyPDF2
+PyPDF2<=3.0
+opencv-python
+camelot[base]
+pandas
+numpy
+tqdm
