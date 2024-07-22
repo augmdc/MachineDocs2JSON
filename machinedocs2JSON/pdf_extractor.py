@@ -10,3 +10,4 @@ class PDFTableExtractor:
             filepath=self.file_path,
             pages=self.pages_to_extract_from
             )
+

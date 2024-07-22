@@ -48,6 +48,7 @@ def process_pdf(args):
 
         logger.info(f"JSON file '{json_filename}' has been created in the output folder.")
         return f"Successfully processed {filepath}"
+
     except FileNotFoundError:
         logger.error(f"File not found: {filepath}")
         return f"Error: File not found - {filepath}"
